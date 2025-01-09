@@ -2,5 +2,5 @@
 FROM apache/airflow:2.9.3 
 
 # Install necessary Python packages
-RUN pip install --no-cache-dir pyhive thrift
+RUN pip install --no-cache-dir pyhive thrift thrift_sasl
 

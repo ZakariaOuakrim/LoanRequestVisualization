@@ -1,0 +1,93 @@
+[2024-11-09T12:37:17.309+0000] {processor.py:161} INFO - Started process (PID=43) to work on /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:37:17.312+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dagLoanRequest.py for tasks to queue
+[2024-11-09T12:37:17.331+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:37:17.328+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:37:22.581+0000] {processor.py:840} INFO - DAG(s) 'Loan_Request_Report' retrieved from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:37:24.986+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:37:24.985+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2024-11-09T12:37:25.111+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:37:25.110+0000] {dag.py:3947} INFO - Setting next_dagrun for Loan_Request_Report to 2024-11-01 00:00:00+00:00, run_after=2024-12-01 00:00:00+00:00
+[2024-11-09T12:37:25.453+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dagLoanRequest.py took 8.175 seconds
+[2024-11-09T12:38:42.788+0000] {processor.py:161} INFO - Started process (PID=108) to work on /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:38:42.801+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dagLoanRequest.py for tasks to queue
+[2024-11-09T12:38:42.806+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:38:42.805+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:39:23.864+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:39:23.859+0000] {timeout.py:68} ERROR - Process timed out, PID: 108
+[2024-11-09T12:39:23.881+0000] {logging_mixin.py:188} WARNING - Exception ignored in: <function WeakKeyDictionary.__init__.<locals>.remove at 0x7f5c6f66e7a0>
+[2024-11-09T12:39:23.884+0000] {logging_mixin.py:188} WARNING - Traceback (most recent call last):
+[2024-11-09T12:39:23.885+0000] {logging_mixin.py:188} WARNING -   File "/usr/local/lib/python3.12/weakref.py", line 369, in remove
+[2024-11-09T12:39:23.887+0000] {logging_mixin.py:188} WARNING -     def remove(k, selfref=ref(self)):
+[2024-11-09T12:39:23.888+0000] {logging_mixin.py:188} WARNING -   File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/timeout.py", line 69, in handle_timeout
+[2024-11-09T12:39:23.898+0000] {logging_mixin.py:188} WARNING -     raise AirflowTaskTimeout(self.error_message)
+[2024-11-09T12:39:23.900+0000] {logging_mixin.py:188} WARNING - airflow.exceptions.AirflowTaskTimeout: DagBag import timeout for /opt/airflow/dags/dagLoanRequest.py after 30.0s.
+Please take a look at these docs to improve your DAG import time:
+* https://airflow.apache.org/docs/apache-airflow/2.9.3/best-practices.html#top-level-python-code
+* https://airflow.apache.org/docs/apache-airflow/2.9.3/best-practices.html#reducing-dag-complexity, PID: 108
+[2024-11-09T12:39:25.100+0000] {processor.py:840} INFO - DAG(s) 'Loan_Request_Report' retrieved from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:39:25.279+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:39:25.278+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2024-11-09T12:39:25.471+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:39:25.470+0000] {dag.py:3947} INFO - Setting next_dagrun for Loan_Request_Report to 2024-11-01 00:00:00+00:00, run_after=2024-12-01 00:00:00+00:00
+[2024-11-09T12:39:25.600+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dagLoanRequest.py took 42.846 seconds
+[2024-11-09T12:39:56.581+0000] {processor.py:161} INFO - Started process (PID=181) to work on /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:39:56.586+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dagLoanRequest.py for tasks to queue
+[2024-11-09T12:39:56.594+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:39:56.593+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:39:58.119+0000] {processor.py:840} INFO - DAG(s) 'Loan_Request_Report' retrieved from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:39:58.165+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:39:58.164+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2024-11-09T12:39:58.217+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:39:58.217+0000] {dag.py:3947} INFO - Setting next_dagrun for Loan_Request_Report to 2024-11-01 00:00:00+00:00, run_after=2024-12-01 00:00:00+00:00
+[2024-11-09T12:39:58.263+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dagLoanRequest.py took 1.737 seconds
+[2024-11-09T12:40:29.564+0000] {processor.py:161} INFO - Started process (PID=240) to work on /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:40:29.584+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dagLoanRequest.py for tasks to queue
+[2024-11-09T12:40:29.640+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:40:29.639+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:40:53.165+0000] {processor.py:840} INFO - DAG(s) 'Loan_Request_Report' retrieved from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:40:53.429+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:40:53.426+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2024-11-09T12:40:53.674+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:40:53.674+0000] {dag.py:3947} INFO - Setting next_dagrun for Loan_Request_Report to 2024-11-01 00:00:00+00:00, run_after=2024-12-01 00:00:00+00:00
+[2024-11-09T12:40:53.782+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dagLoanRequest.py took 24.448 seconds
+[2024-11-09T12:41:33.789+0000] {processor.py:161} INFO - Started process (PID=304) to work on /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:41:33.797+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dagLoanRequest.py for tasks to queue
+[2024-11-09T12:41:33.813+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:41:33.805+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:41:38.856+0000] {processor.py:840} INFO - DAG(s) 'Loan_Request_Report' retrieved from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:41:39.003+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:41:39.002+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2024-11-09T12:41:39.079+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:41:39.078+0000] {dag.py:3947} INFO - Setting next_dagrun for Loan_Request_Report to 2024-11-01 00:00:00+00:00, run_after=2024-12-01 00:00:00+00:00
+[2024-11-09T12:41:39.137+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dagLoanRequest.py took 5.403 seconds
+[2024-11-09T12:42:10.051+0000] {processor.py:161} INFO - Started process (PID=375) to work on /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:42:10.054+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dagLoanRequest.py for tasks to queue
+[2024-11-09T12:42:10.062+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:42:10.061+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:42:11.335+0000] {processor.py:840} INFO - DAG(s) 'Loan_Request_Report' retrieved from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:42:11.381+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:42:11.381+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2024-11-09T12:42:11.435+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:42:11.434+0000] {dag.py:3947} INFO - Setting next_dagrun for Loan_Request_Report to 2024-11-01 00:00:00+00:00, run_after=2024-12-01 00:00:00+00:00
+[2024-11-09T12:42:11.479+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dagLoanRequest.py took 1.459 seconds
+[2024-11-09T12:42:42.838+0000] {processor.py:161} INFO - Started process (PID=434) to work on /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:42:42.842+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dagLoanRequest.py for tasks to queue
+[2024-11-09T12:42:42.863+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:42:42.861+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:42:45.580+0000] {processor.py:840} INFO - DAG(s) 'Loan_Request_Report' retrieved from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:42:45.648+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:42:45.647+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2024-11-09T12:42:45.717+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:42:45.717+0000] {dag.py:3947} INFO - Setting next_dagrun for Loan_Request_Report to 2024-11-01 00:00:00+00:00, run_after=2024-12-01 00:00:00+00:00
+[2024-11-09T12:42:45.769+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dagLoanRequest.py took 3.006 seconds
+[2024-11-09T12:43:16.695+0000] {processor.py:161} INFO - Started process (PID=498) to work on /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:43:16.698+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dagLoanRequest.py for tasks to queue
+[2024-11-09T12:43:16.703+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:43:16.702+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:43:18.094+0000] {processor.py:840} INFO - DAG(s) 'Loan_Request_Report' retrieved from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:43:18.139+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:43:18.137+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2024-11-09T12:43:18.195+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:43:18.194+0000] {dag.py:3947} INFO - Setting next_dagrun for Loan_Request_Report to 2024-11-01 00:00:00+00:00, run_after=2024-12-01 00:00:00+00:00
+[2024-11-09T12:43:18.247+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dagLoanRequest.py took 1.581 seconds
+[2024-11-09T12:43:52.262+0000] {processor.py:161} INFO - Started process (PID=561) to work on /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:43:52.278+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dagLoanRequest.py for tasks to queue
+[2024-11-09T12:43:52.306+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:43:52.302+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:44:04.289+0000] {processor.py:840} INFO - DAG(s) 'Loan_Request_Report' retrieved from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:44:04.395+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:44:04.394+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2024-11-09T12:44:04.679+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dagLoanRequest.py took 12.560 seconds
+[2024-11-09T12:44:35.702+0000] {processor.py:161} INFO - Started process (PID=636) to work on /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:44:35.709+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dagLoanRequest.py for tasks to queue
+[2024-11-09T12:44:35.723+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:44:35.722+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:44:45.634+0000] {processor.py:840} INFO - DAG(s) 'Loan_Request_Report' retrieved from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:44:45.911+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:44:45.841+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2024-11-09T12:44:47.321+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dagLoanRequest.py took 11.646 seconds
+[2024-11-09T12:45:38.201+0000] {processor.py:161} INFO - Started process (PID=701) to work on /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:45:38.217+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dagLoanRequest.py for tasks to queue
+[2024-11-09T12:45:38.245+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:45:38.242+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-09T12:46:26.546+0000] {logging_mixin.py:188} INFO - [2024-11-09T12:46:26.473+0000] {timeout.py:68} ERROR - Process timed out, PID: 701
+[2024-11-09T12:46:26.559+0000] {logging_mixin.py:188} WARNING - Exception ignored in: <function WeakKeyDictionary.__init__.<locals>.remove at 0x7f5c6f66e7a0>
+[2024-11-09T12:46:26.562+0000] {logging_mixin.py:188} WARNING - Traceback (most recent call last):
+[2024-11-09T12:46:26.574+0000] {logging_mixin.py:188} WARNING -   File "/usr/local/lib/python3.12/weakref.py", line 369, in remove
+[2024-11-09T12:46:26.627+0000] {logging_mixin.py:188} WARNING -     def remove(k, selfref=ref(self)):
+[2024-11-09T12:46:26.634+0000] {logging_mixin.py:188} WARNING -   File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/timeout.py", line 69, in handle_timeout
+[2024-11-09T12:46:26.720+0000] {logging_mixin.py:188} WARNING -     raise AirflowTaskTimeout(self.error_message)
+[2024-11-09T12:46:26.721+0000] {logging_mixin.py:188} WARNING - airflow.exceptions.AirflowTaskTimeout: DagBag import timeout for /opt/airflow/dags/dagLoanRequest.py after 30.0s.
+Please take a look at these docs to improve your DAG import time:
+* https://airflow.apache.org/docs/apache-airflow/2.9.3/best-practices.html#top-level-python-code
+* https://airflow.apache.org/docs/apache-airflow/2.9.3/best-practices.html#reducing-dag-complexity, PID: 701

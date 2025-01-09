@@ -1,0 +1,151 @@
+[2024-11-29T01:34:17.834+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-11-29T01:34:18.006+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Loan_Request_Report.Extract __airflow_temporary_run_2024-11-29T01:34:09.485144+00:00__ [queued]>
+[2024-11-29T01:34:18.039+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Loan_Request_Report.Extract __airflow_temporary_run_2024-11-29T01:34:09.485144+00:00__ [queued]>
+[2024-11-29T01:34:18.041+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-11-29T01:34:18.119+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): Extract> on 2024-11-28 00:00:00+00:00
+[2024-11-29T01:34:18.170+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62: DeprecationWarning: This process (pid=285) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-11-29T01:34:18.174+0000] {standard_task_runner.py:64} INFO - Started process 287 to run task
+[2024-11-29T01:34:18.183+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'Loan_Request_Report', 'Extract', '__***_temporary_run_2024-11-29T01:34:09.485144+00:00__', '--job-id', '419', '--raw', '--subdir', 'DAGS_FOLDER/dagLoanRequest.py', '--cfg-path', '/tmp/tmp3nr7fw2p']
+[2024-11-29T01:34:18.197+0000] {standard_task_runner.py:91} INFO - Job 419: Subtask Extract
+[2024-11-29T01:34:18.490+0000] {task_command.py:426} INFO - Running <TaskInstance: Loan_Request_Report.Extract __airflow_temporary_run_2024-11-29T01:34:09.485144+00:00__ [running]> on host 97460a9713a2
+[2024-11-29T01:34:18.946+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Loan_Request_Report' AIRFLOW_CTX_TASK_ID='Extract' AIRFLOW_CTX_EXECUTION_DATE='2024-11-28T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='__***_temporary_run_2024-11-29T01:34:09.485144+00:00__'
+[2024-11-29T01:34:18.949+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-11-29T01:34:19.422+0000] {hive.py:475} INFO - USE `m2t`
+[2024-11-29T01:34:19.965+0000] {warnings.py:112} WARNING - /opt/***/dags/etlProcess.py:165: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  df = pd.read_sql(query1, conn)
+
+[2024-11-29T01:34:19.966+0000] {hive.py:475} INFO - 
+        SELECT
+            cl.id as id1,
+            lr.id as id2,
+            cl.phone_number AS N_GSM,
+            cl.first_name  AS NOM,
+            cl.last_name AS PRENOM,
+            cl.age as age,
+            cl.city_label as city,
+            cl.gender as gender,
+            lr.code_ls AS CODE_DOSSIER,
+            lr.requested_amount AS MONTANT_DEMANDE,
+            lr.awarded_amount AS MONTANT_ACCORDE,
+            lr.created_date AS DATE_DEMANDE_CREDIT,
+            SPLIT(lr.created_date, ' ')[1] AS HEURE_DEMANDE_CREDIT,
+            lr.status AS STATUT_DOSSIER,
+            lr.rejection_reason as rejection_reason,
+            lr.requested_deadlines as NOMBRE_ECHEANCE,
+            deadlines.deadline1 AS DATE_ECHEANCE1,
+            deadlines.deadline2 AS DATE_ECHEANCE2,
+            deadlines.deadline3 AS DATE_ECHEANCE3,
+            deadlines.deadline4 AS DATE_ECHEANCE4,
+            lr.fees AS FREE_DE_SERVICE,
+            lr.rate AS TAUX_D_INTERET,
+            CASE
+                WHEN lr.code_es = '123456' THEN '012006'
+                ELSE lr.code_es
+            END AS CODE_AGENCE
+        FROM clients cl
+        LEFT JOIN loan_request lr ON cl.id = lr.fk_client
+        LEFT JOIN (
+            SELECT 
+                fk_loan_request AS loan_request_id, 
+                MAX(CASE WHEN deadline_row = 1 THEN deadline END) AS deadline1,
+                MAX(CASE WHEN deadline_row = 2 THEN deadline END) AS deadline2,
+                MAX(CASE WHEN deadline_row = 3 THEN deadline END) AS deadline3,
+                MAX(CASE WHEN deadline_row = 4 THEN deadline END) AS deadline4
+            FROM (
+                SELECT 
+                    fk_loan_request, 
+                    deadline, 
+                    ROW_NUMBER() OVER (PARTITION BY fk_loan_request ORDER BY deadline) AS deadline_row
+                FROM payment_deadline
+            ) deadline_subquery
+            GROUP BY fk_loan_request
+        ) AS deadlines ON lr.id = deadlines.loan_request_id
+        WHERE lr.produit = 'TAYSSIR' AND date(lr.created_date) >= '2024-06-13'
+        ORDER BY DATE_DEMANDE_CREDIT DESC
+    
+[2024-11-29T01:36:44.727+0000] {warnings.py:112} WARNING - /opt/***/dags/etlProcess.py:183: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  df2 = pd.read_sql(query2, conn)
+
+[2024-11-29T01:36:44.768+0000] {hive.py:475} INFO - 
+        SELECT
+            cl.id as id3,
+            lr.id as id4,
+            lr.code_es as code_es,
+            lr.produit as produit,
+            pd.method as method,
+            pd.deadline as deadline,
+            pd.payment_date as payment_date,
+            pd.status as status
+        FROM clients cl
+        LEFT JOIN loan_request lr ON cl.id = lr.fk_client
+        LEFT JOIN payment_deadline pd ON lr.id = pd.fk_loan_request
+        WHERE lr.produit = 'TAYSSIR' AND date(lr.created_date) >= '2024-06-13'
+    
+[2024-11-29T01:38:05.148+0000] {local_task_job_runner.py:313} WARNING - State of this instance has been externally set to None. Terminating instance.
+[2024-11-29T01:38:05.170+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2024-11-29T01:38:05.229+0000] {process_utils.py:132} INFO - Sending 15 to group 287. PIDs of all processes in the group: [287]
+[2024-11-29T01:38:05.231+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 287
+[2024-11-29T01:38:05.248+0000] {taskinstance.py:2611} ERROR - Received SIGTERM. Terminating subprocesses.
+[2024-11-29T01:38:05.250+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-11-29T01:38:05.418+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/dagLoanRequest.py", line 37, in extract_task
+    merged_df, original_df = extract_data_from_hive(kwargs['required_date'])
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/etlProcess.py", line 189, in extract_data_from_hive
+    print(merged_df)
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/frame.py", line 1133, in __repr__
+    return self.to_string(**repr_params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/frame.py", line 1310, in to_string
+    return fmt.DataFrameRenderer(formatter).to_string(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/formats/format.py", line 1100, in to_string
+    string = string_formatter.to_string()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/formats/string.py", line 29, in to_string
+    text = self._get_string_representation()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/formats/string.py", line 53, in _get_string_representation
+    return self._fit_strcols_to_terminal_width(strcols)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/formats/string.py", line 163, in _fit_strcols_to_terminal_width
+    col_lens = Series([Series(ele).str.len().max() for ele in strcols])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/series.py", line 512, in __init__
+    data = sanitize_array(data, index, dtype, copy)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/construction.py", line 653, in sanitize_array
+    subarr = maybe_convert_platform(data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/dtypes/cast.py", line 134, in maybe_convert_platform
+    arr = lib.maybe_convert_objects(arr)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 2613, in signal_handler
+    raise AirflowTaskTerminated("Task received SIGTERM signal")
+airflow.exceptions.AirflowTaskTerminated: Task received SIGTERM signal
+[2024-11-29T01:38:05.547+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=Loan_Request_Report, task_id=Extract, run_id=__***_temporary_run_2024-11-29T01:34:09.485144+00:00__, execution_date=20241128T000000, start_date=20241129T013418, end_date=20241129T013805
+[2024-11-29T01:38:05.948+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 419 for task Extract ((psycopg2.errors.ForeignKeyViolation) insert or update on table "task_fail" violates foreign key constraint "task_fail_ti_fkey"
+DETAIL:  Key (dag_id, task_id, run_id, map_index)=(Loan_Request_Report, Extract, __airflow_temporary_run_2024-11-29T01:34:09.485144+00:00__, -1) is not present in table "task_instance".
+
+[SQL: INSERT INTO task_fail (task_id, dag_id, run_id, map_index, start_date, end_date, duration) VALUES (%(task_id)s, %(dag_id)s, %(run_id)s, %(map_index)s, %(start_date)s, %(end_date)s, %(duration)s) RETURNING task_fail.id]
+[parameters: {'task_id': 'Extract', 'dag_id': 'Loan_Request_Report', 'run_id': '__airflow_temporary_run_2024-11-29T01:34:09.485144+00:00__', 'map_index': -1, 'start_date': datetime.datetime(2024, 11, 29, 1, 34, 18, 13720, tzinfo=Timezone('UTC')), 'end_date': datetime.datetime(2024, 11, 29, 1, 38, 5, 534334, tzinfo=Timezone('UTC')), 'duration': 227}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj); 287)
+[2024-11-29T01:38:06.077+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=287, status='terminated', exitcode=1, started='01:34:17') (287) terminated with exit code 1

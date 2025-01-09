@@ -1,0 +1,29 @@
+[2024-11-28T23:20:31.069+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-11-28T23:20:31.698+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Loan_Request_Report.Transform manual__2024-11-28T23:05:59.234756+00:00 [queued]>
+[2024-11-28T23:20:31.741+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Loan_Request_Report.Transform manual__2024-11-28T23:05:59.234756+00:00 [queued]>
+[2024-11-28T23:20:31.743+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-11-28T23:20:31.919+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): Transform> on 2024-11-28 23:05:59.234756+00:00
+[2024-11-28T23:20:32.135+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'Loan_Request_Report', 'Transform', 'manual__2024-11-28T23:05:59.234756+00:00', '--job-id', '395', '--raw', '--subdir', 'DAGS_FOLDER/dagLoanRequest.py', '--cfg-path', '/tmp/tmp3bksgbml']
+[2024-11-28T23:20:32.138+0000] {standard_task_runner.py:91} INFO - Job 395: Subtask Transform
+[2024-11-28T23:20:32.133+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62: DeprecationWarning: This process (pid=81) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-11-28T23:20:32.198+0000] {standard_task_runner.py:64} INFO - Started process 90 to run task
+[2024-11-28T23:20:33.209+0000] {task_command.py:426} INFO - Running <TaskInstance: Loan_Request_Report.Transform manual__2024-11-28T23:05:59.234756+00:00 [running]> on host 97460a9713a2
+[2024-11-28T23:20:35.107+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Loan_Request_Report' AIRFLOW_CTX_TASK_ID='Transform' AIRFLOW_CTX_EXECUTION_DATE='2024-11-28T23:05:59.234756+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-28T23:05:59.234756+00:00'
+[2024-11-28T23:20:35.115+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-11-28T23:20:35.680+0000] {logging_mixin.py:188} INFO - here I am in the transoform process
+[2024-11-28T23:20:35.693+0000] {logging_mixin.py:188} INFO - Index(['id1', 'id2', 'n_gsm', 'nom', 'prenom', 'age', 'city', 'gender',
+       'code_dossier', 'montant_demande', 'montant_accorde',
+       'date_demande_credit', 'heure_demande_credit', 'statut_dossier',
+       'rejection_reason', 'nombre_echeance', 'date_echeance1',
+       'date_echeance2', 'date_echeance3', 'date_echeance4', 'free_de_service',
+       'taux_d_interet', 'code_agence', 'id3', 'id4', 'code_es', 'produit',
+       'method', 'deadline', 'payment_date', 'status'],
+      dtype='object')
+[2024-11-28T23:20:37.658+0000] {python.py:237} INFO - Done. Returned value was: None
+[2024-11-28T23:20:37.659+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-11-28T23:20:37.994+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=Loan_Request_Report, task_id=Transform, run_id=manual__2024-11-28T23:05:59.234756+00:00, execution_date=20241128T230559, start_date=20241128T232031, end_date=20241128T232037
+[2024-11-28T23:20:38.567+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2024-11-28T23:20:39.097+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-11-28T23:20:39.105+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

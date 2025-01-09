@@ -1,0 +1,46 @@
+[2024-11-07T19:25:33.225+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-11-07T19:25:33.299+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Loan_Request_Report.Extract __airflow_temporary_run_2024-11-07T19:25:27.725372+00:00__ [queued]>
+[2024-11-07T19:25:33.319+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Loan_Request_Report.Extract __airflow_temporary_run_2024-11-07T19:25:27.725372+00:00__ [queued]>
+[2024-11-07T19:25:33.320+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-11-07T19:25:33.352+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): Extract> on 2024-06-11 00:00:00+00:00
+[2024-11-07T19:25:33.368+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62: DeprecationWarning: This process (pid=222) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-11-07T19:25:33.371+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'Loan_Request_Report', 'Extract', '__***_temporary_run_2024-11-07T19:25:27.725372+00:00__', '--job-id', '183', '--raw', '--subdir', 'DAGS_FOLDER/dagLoanRequest.py', '--cfg-path', '/tmp/tmp8wdeiaq1']
+[2024-11-07T19:25:33.373+0000] {standard_task_runner.py:64} INFO - Started process 224 to run task
+[2024-11-07T19:25:33.374+0000] {standard_task_runner.py:91} INFO - Job 183: Subtask Extract
+[2024-11-07T19:25:33.489+0000] {task_command.py:426} INFO - Running <TaskInstance: Loan_Request_Report.Extract __airflow_temporary_run_2024-11-07T19:25:27.725372+00:00__ [running]> on host 2bac939b7bc7
+[2024-11-07T19:25:33.711+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Loan_Request_Report' AIRFLOW_CTX_TASK_ID='Extract' AIRFLOW_CTX_EXECUTION_DATE='2024-06-11T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='__***_temporary_run_2024-11-07T19:25:27.725372+00:00__'
+[2024-11-07T19:25:33.714+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-11-07T19:25:33.717+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2024-11-07T19:25:33.718+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/dagLoanRequest.py", line 31, in extract_task
+    merged_df, original_df = extract_data_from_hive(kwargs['required_date'])
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/etlProcess.py", line 84, in extract_data_from_hive
+    conn = hive.Connection(host="hive-server", port=10000, database='m2t')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pyhive/hive.py", line 242, in __init__
+    import thrift_sasl
+ModuleNotFoundError: No module named 'thrift_sasl'
+[2024-11-07T19:25:33.746+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=Loan_Request_Report, task_id=Extract, run_id=__***_temporary_run_2024-11-07T19:25:27.725372+00:00__, execution_date=20240611T000000, start_date=20241107T192533, end_date=20241107T192533
+[2024-11-07T19:25:33.775+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 183 for task Extract (No module named 'thrift_sasl'; 224)
+[2024-11-07T19:25:33.819+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2024-11-07T19:25:33.863+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-11-07T19:25:33.867+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

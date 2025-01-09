@@ -1,0 +1,67 @@
+[2024-11-05T13:31:28.542+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2024-11-05T13:31:28.899+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Loan_Request_Report.Extract manual__2024-11-05T13:31:06.333621+00:00 [queued]>
+[2024-11-05T13:31:28.956+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Loan_Request_Report.Extract manual__2024-11-05T13:31:06.333621+00:00 [queued]>
+[2024-11-05T13:31:28.957+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2024-11-05T13:31:29.114+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): Extract> on 2024-11-05 13:31:06.333621+00:00
+[2024-11-05T13:31:29.192+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'Loan_Request_Report', 'Extract', 'manual__2024-11-05T13:31:06.333621+00:00', '--job-id', '47', '--raw', '--subdir', 'DAGS_FOLDER/dagLoanRequest.py', '--cfg-path', '/tmp/tmpcnav24yi']
+[2024-11-05T13:31:29.201+0000] {standard_task_runner.py:91} INFO - Job 47: Subtask Extract
+[2024-11-05T13:31:29.377+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62: DeprecationWarning: This process (pid=93) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2024-11-05T13:31:29.378+0000] {standard_task_runner.py:64} INFO - Started process 102 to run task
+[2024-11-05T13:31:30.007+0000] {task_command.py:426} INFO - Running <TaskInstance: Loan_Request_Report.Extract manual__2024-11-05T13:31:06.333621+00:00 [running]> on host f4ed2a87aeca
+[2024-11-05T13:31:31.221+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Loan_Request_Report' AIRFLOW_CTX_TASK_ID='Extract' AIRFLOW_CTX_EXECUTION_DATE='2024-11-05T13:31:06.333621+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-05T13:31:06.333621+00:00'
+[2024-11-05T13:31:31.225+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2024-11-05T13:32:13.512+0000] {hive.py:475} INFO - USE `m2t`
+[2024-11-05T13:32:52.940+0000] {warnings.py:112} WARNING - /opt/***/dags/etlProcess.py:136: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  df = pd.read_sql(query1, conn)
+
+[2024-11-05T13:32:52.941+0000] {hive.py:475} INFO - 
+        SELECT
+            cl.id as id1,
+            lr.id as id2,
+            cl.phone_number AS N_GSM,
+            cl.first_name  AS NOM,
+            cl.last_name AS PRENOM,
+            cl.age as age,
+            cl.city_label as city,
+            cl.gender as gender,
+            lr.code_ls AS CODE_DOSSIER,
+            lr.requested_amount AS MONTANT_DEMANDE,
+            lr.awarded_amount AS MONTANT_ACCORDE,
+            lr.created_date AS DATE_DEMANDE_CREDIT,
+            SPLIT(lr.created_date, ' ')[1] AS HEURE_DEMANDE_CREDIT,
+            lr.status AS STATUT_DOSSIER,
+            lr.rejection_reason as rejection_reason,
+            lr.requested_deadlines as NOMBRE_ECHEANCE,
+            deadlines.deadline1 AS DATE_ECHEANCE1,
+            deadlines.deadline2 AS DATE_ECHEANCE2,
+            deadlines.deadline3 AS DATE_ECHEANCE3,
+            deadlines.deadline4 AS DATE_ECHEANCE4,
+            lr.fees AS FREE_DE_SERVICE,
+            lr.rate AS TAUX_D_INTERET,
+            CASE
+                WHEN lr.code_es = '123456' THEN '012006'
+                ELSE lr.code_es
+            END AS CODE_AGENCE
+        FROM clients cl
+        LEFT JOIN loan_request lr ON cl.id = lr.fk_client
+        LEFT JOIN (
+            SELECT 
+                fk_loan_request AS loan_request_id, 
+                MAX(CASE WHEN deadline_row = 1 THEN deadline END) AS deadline1,
+                MAX(CASE WHEN deadline_row = 2 THEN deadline END) AS deadline2,
+                MAX(CASE WHEN deadline_row = 3 THEN deadline END) AS deadline3,
+                MAX(CASE WHEN deadline_row = 4 THEN deadline END) AS deadline4
+            FROM (
+                SELECT 
+                    fk_loan_request, 
+                    deadline, 
+                    ROW_NUMBER() OVER (PARTITION BY fk_loan_request ORDER BY deadline) AS deadline_row
+                FROM payment_deadline
+            ) deadline_subquery
+            GROUP BY fk_loan_request
+        ) AS deadlines ON lr.id = deadlines.loan_request_id
+        WHERE lr.produit = 'TAYSSIR' AND date(lr.created_date) >= '2024-10-06'
+        ORDER BY DATE_DEMANDE_CREDIT DESC
+    

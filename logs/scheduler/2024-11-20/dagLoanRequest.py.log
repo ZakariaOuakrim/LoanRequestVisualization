@@ -1,0 +1,7 @@
+[2024-11-20T14:01:19.969+0000] {processor.py:161} INFO - Started process (PID=43) to work on /opt/airflow/dags/dagLoanRequest.py
+[2024-11-20T14:01:19.971+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/dagLoanRequest.py for tasks to queue
+[2024-11-20T14:01:19.974+0000] {logging_mixin.py:188} INFO - [2024-11-20T14:01:19.974+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-20T14:01:23.664+0000] {processor.py:840} INFO - DAG(s) 'Loan_Request_Report' retrieved from /opt/airflow/dags/dagLoanRequest.py
+[2024-11-20T14:01:25.097+0000] {logging_mixin.py:188} INFO - [2024-11-20T14:01:25.097+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2024-11-20T14:01:25.175+0000] {logging_mixin.py:188} INFO - [2024-11-20T14:01:25.175+0000] {dag.py:3947} INFO - Setting next_dagrun for Loan_Request_Report to 2024-11-01 00:00:00+00:00, run_after=2024-12-01 00:00:00+00:00
+[2024-11-20T14:01:25.222+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/dagLoanRequest.py took 5.273 seconds
